@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Bebas Neue';
+  --font-body: 'DM Sans';
+  --brand-red: #E50914;
+  --brand-gold: #F5C518;
+  --surface: #141414;
+  --surface-50: #1f1f1f;
+  --surface-100: #2a2a2a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--surface);
+  color: #ffffff;
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-red);
+}
+
+/* Loading Skeleton */
+.skeleton {
+  background: linear-gradient(90deg, #1f1f1f 25%, #2a2a2a 50%, #1f1f1f 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Movie Card Hover Effects */
+.movie-card {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.movie-card:hover {
+  transform: scale(1.05) translateY(-4px);
+  z-index: 10;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #E50914, #FF6B35);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Focus Styles */
+:focus-visible {
+  outline: 2px solid var(--brand-red);
+  outline-offset: 2px;
+}
+
+/* Horizontal Scroll Container */
+.scroll-container {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hero Video Overlay */
+.hero-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(20, 20, 20, 0.95) 0%,
+    rgba(20, 20, 20, 0.7) 40%,
+    transparent 70%
+  ),
+  linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(20, 20, 20, 0.8) 80%,
+    #141414 100%
+  );
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brand-red hover:bg-brand-red-dark text-white font-semibold px-6 py-3 rounded-md transition-all duration-200 flex items-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply bg-white/20 hover:bg-white/30 text-white font-semibold px-6 py-3 rounded-md transition-all duration-200 flex items-center gap-2 backdrop-blur-sm;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold text-white mb-4 font-display tracking-wider;
+  }
+
+  .badge {
+    @apply px-2 py-0.5 rounded text-xs font-medium;
+  }
+}
