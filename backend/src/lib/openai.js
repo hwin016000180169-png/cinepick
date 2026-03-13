@@ -1,8 +1,8 @@
 const OpenAI = require('openai');
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
+const openai = process.env.OPENAI_API_KEY
+  ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  : null;
 
 /**
  * Generate movie recommendations based on user preferences
@@ -50,6 +50,10 @@ ${movieList}
 }
 `;
 
+  if (!openai) {
+    throw new Error('AI 기능을 사용하려면 OPENAI_API_KEY가 필요합니다.');
+  }
+
   try {
     const response = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
@@ -71,6 +75,10 @@ ${movieList}
  * Generate a movie summary/review using AI
  */
 async function generateMovieSummary(movie) {
+  if (!openai) {
+    throw new Error('AI 기능을 사용하려면 OPENAI_API_KEY가 필요합니다.');
+  }
+
   const prompt = `
 영화 "${movie.title}" (${movie.release_year})에 대해 한국어로 간단하고 흥미로운 소개글을 작성해주세요.
 - 2-3문장으로 간결하게
